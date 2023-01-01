@@ -6,6 +6,11 @@ const generateMarkdown = require('./utils/generateMarkdown');
 // TODO: Create an array of questions for user input
 /*
 const questions = [
+    {
+    type: 'input',
+    message: 'Provide a title for your project.',
+    name: 'title',
+  },
   {
     type: 'input',
     message: 'Provide a short description explaining the what, why, and how of your project.',
@@ -55,7 +60,7 @@ const questions = [
     type: 'list',
     message: 'What license would you like to add to your README file?',
     name: 'license',
-    choices: ['Apache License 2.0','GNU GPLv3', 'MIT', 'ISC', ],
+    choices: ['Apache License 2.0','GNU GPLv3', 'MIT', 'ISC', 'None' ],
   },
 ];
 
@@ -78,8 +83,8 @@ function writeToFile(fileName, data) {
 
 // TODO: Create a function to initialize app
 function init() {
-  inquirer.prompt(questions).then((answers) => {
-    writeToFile("README.md", answers);
+  inquirer.prompt(questions).then((contents) => {
+    writeToFile("README.md", contents);
   });
 }
 
