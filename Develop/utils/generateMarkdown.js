@@ -1,94 +1,95 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+const licenses = {
+  'Apache License 2.0': {
+    badgeUrl: 'https://img.shields.io/badge/License-Apache_2.0-blue.svg',
+    url: 'https://opensource.org/licenses/Apache-2.0',
+    label: 'Apache 2'
+  },
+  'GNU GPLv3': {
+    badgeUrl: 'https://img.shields.io/badge/License-GPLv3-blue.svg',
+    url: 'https://www.gnu.org/licenses/gpl-3.0',
+    label: 'GPL v3'
+  },
+  'MIT': {
+    badgeUrl: 'https://img.shields.io/badge/License-MIT-yellow.svg',
+    url: 'https://opensource.org/licenses/MIT',
+    label: 'MIT'
+  },
+  'ISC': {
+    badgeUrl: 'https://img.shields.io/badge/License-ISC-blue.svg',
+    url: 'https://opensource.org/licenses/ISC',
+    label: 'ISC'
+  },
+};
+
 function renderLicenseBadge(license) {
-  let badgeUrl;
+  const licenseData = licenses[license];
 
-  // Switch 
-  switch (license) {
-    case 'Apache License 2.0':
-      badgeUrl = 'https://img.shields.io/badge/License-Apache_2.0-blue.svg';
-      break;
-    case 'GNU GPLv3':
-      badgeUrl = 'https://img.shields.io/badge/License-GPLv3-blue.svg';
-      break;
-    case 'MIT':
-      badgeUrl = 'https://img.shields.io/badge/license-MIT-blue.svg';
-      break;
-    case 'ISC':
-      badgeUrl = 'https://img.shields.io/badge/License-ISC-blue.svg';
-      break;
-  }
-
-  if (license === 'None') {
+  if (!licenseData) {
     return '';
   }
-  else {
-    return `![License](${badgeUrl})`;
-  }
+
+  return `![License](${licenseData.badgeUrl})`;
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
 function renderLicenseLink(license) {
-  let licenseLink;
-
-  // Switch 
-  switch (license) {
-    case 'Apache License 2.0':
-      licenseLink = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
-      break;
-    case 'GNU GPLv3':
-      licenseLink = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
-      break;
-    case 'MIT':
-      licenseLink = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-      break;
-    case 'ISC':
-      licenseLink = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
-      break;
-  }
-  if (license === 'None') {
+  const licenseData = licenses[license];
+  
+  if (!licenseData) {
     return '';
   }
-  else {
-    return `${licenseLink}`;
-  }
+
+  return `[${licenseData.label}](${licenseData.url})`;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
+
 function renderLicenseSection(license) {
-
   if (license === 'None') {
     return '';
   }
-  else {
-    return `## License`;
-  }
+
+  const licenseLink = renderLicenseLink(license);
+  
+  return `## License
+
+Licensed under the ${licenseLink} license.`;
 }
 
-// TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-
-  console.log('The license is: ', data.license);
-
-  const licenseBadge = renderLicenseBadge(data.license);
-
-  console.log('The license badge is: ', licenseBadge);
-
-  const licenseLink = renderLicenseLink(data.license);
-
-  console.log('The license link is: ', licenseLink);
-
-  const licenseSection = renderLicenseSection(data.license);
-
+  const {license} = data;
+  const licenseBadge = renderLicenseBadge(license);
+  const licenseSection = renderLicenseSection(license);
 
   return `# ${data.title}
 ${licenseBadge}
 
+## Description
+${data.description}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+${licenseSection ? '- [License](#license)' : ''}
+- [Contribute](#contribute)
+- [Tests](#tests)
+
+## Installation
+${data.installation}
+
+## Usage
+${data.usage}
+
+## Credits
+${data.credits}
+
 ${licenseSection}
 
-${licenseLink}
+## Contribute
+${data.contribute}
+
+## Tests
+${data.tests}
 `;
 }
 

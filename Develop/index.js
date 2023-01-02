@@ -3,23 +3,16 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown');
 
-// TODO: Create an array of questions for user input
-/*
 const questions = [
-    {
+  {
     type: 'input',
     message: 'Provide a title for your project.',
-    name: 'title',
+    name: 'title'
   },
   {
     type: 'input',
     message: 'Provide a short description explaining the what, why, and how of your project.',
     name: 'description',
-  },
-  {
-    type: 'input',
-    message: 'hat problem does it solve?',
-    name: 'table of contents',
   },
   {
     type: 'input',
@@ -33,19 +26,19 @@ const questions = [
   },
   {
     type: 'input',
-    message: 'List details of any creators, followed tutorials and collaborator names with GitHub profiles here.',
+    message: 'List details of any followed tutorials, collaborator names with GitHub profiles and creators that helped you.',
     name: 'credits',
   },
   {
     type: 'list',
     message: 'What license would you like to add to your README file?',
     name: 'license',
-    choices: ['Apache License 2.0','GNU GPLv3', 'MIT', 'ISC'],
+    choices: ['Apache License 2.0', 'GNU GPLv3', 'MIT', 'ISC', 'None'],
   },
   {
     type: 'input',
     message: 'If you would like other developers to contribute to your application or package, please include guidelines for how to do so.',
-    name: 'contributing',
+    name: 'contribute',
   },
   {
     type: 'input',
@@ -53,23 +46,10 @@ const questions = [
     name: 'tests',
   },
 ];
-*/
 
-const questions = [
-  {
-    type: 'list',
-    message: 'What license would you like to add to your README file?',
-    name: 'license',
-    choices: ['Apache License 2.0','GNU GPLv3', 'MIT', 'ISC', 'None' ],
-  },
-];
-
-// TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  console.log(data);
   const contents = generateMarkdown(data);
-  console.log('Writing the following to file...', contents);
-
+  
   fs.writeFile(fileName, contents, (err) => {
     if (err)
       console.log(err);
@@ -81,7 +61,6 @@ function writeToFile(fileName, data) {
   });
 }
 
-// TODO: Create a function to initialize app
 function init() {
   inquirer.prompt(questions).then((contents) => {
     writeToFile("README.md", contents);
