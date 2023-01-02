@@ -73,6 +73,7 @@ ${data.description}
 ${licenseSection ? '- [License](#license)' : ''}
 - [Contribute](#contribute)
 - [Tests](#tests)
+- [Questions](#questions)
 
 ## Installation
 ${data.installation}
