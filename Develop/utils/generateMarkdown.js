@@ -90,6 +90,11 @@ ${data.contribute}
 
 ## Tests
 ${data.tests}
+
+## Questions
+My GitHub username is ${data.github} and you can find my profile [here](http://github.com/${data.github}).
+
+E-mail any questions you may have to ${data.email}.
 `;
 }
 

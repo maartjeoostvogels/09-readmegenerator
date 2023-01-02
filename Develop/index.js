@@ -45,6 +45,16 @@ const questions = [
     message: 'Write tests for your application and provide examples on how to run them here.',
     name: 'tests',
   },
+  {
+    type: 'input',
+    message: 'What is your GitHub username?',
+    name: 'github',
+  },
+  {
+    type: 'input',
+    message: 'What is your e-mail address?',
+    name: 'email',
+  },
 ];
 
 function writeToFile(fileName, data) {
